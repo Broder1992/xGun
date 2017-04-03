@@ -108,7 +108,63 @@ type Guns struct{
 
 type GunLogBookID_holder struct {
 
-	V5Cs 	[]string `json:"GunLogBookID"`
+	GunLogBookIds 	[]string `json:"GunLogBookID"`
+}
+
+//==============================================================================================================================
+//	User_and_eCert - Struct for storing the JSON of a user and their ecert - Generic
+//==============================================================================================================================
+
+
+type User_and_eCert struct {
+
+	Identity string `json:"identity"`
+
+	eCert string `json:"ecert"`
+
+}
+
+//==============================================================================================================================
+//	The init function that is called on deplpoyment of the chain code.
+//==============================================================================================================================
+
+func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
+
+	var gunLogBookIds GunLogBookID_holder
+
+	bytes, err := json.Marshal(gunLogBookIds)
+
+	if err !nil { return nil, errors.New("Error creating GunLogBookId_holder record")}
+
+	err = stub.PutState("gunLogBookIds", bytes)
+
+	for i:=0 i < len(args); i=1+2{
+		t.add_ecert(stub, args[i], args[i + 1])
+	}
+
+	return nil, nil;
+}
+
+//==============================================================================================================================
+
+//	 General Functions
+
+//==============================================================================================================================
+
+//	 get_ecert - Takes the name passed and calls out to the REST API for HyperLedger to retrieve the ecert
+
+//				 for that user. Returns the ecert as retrived including html encoding.
+
+//==============================================================================================================================
+
+func (t *SimpleChaincode) get_ecert(stub shim.ChaincodeStubInterface, name string) ([]byte, error) {
+
+	ecert, err := stub.GetState(name)
+
+	if err != nil { return nil, errors.New("Couldn't retrieve ecert for user " + name) }
+
+	return ecert, nil
+
 }
 
 
