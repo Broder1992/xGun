@@ -98,7 +98,17 @@ type Guns struct{
 
 	GunLogBookID    string `json:"gunLogBookID"`
 
+}
 
+//==============================================================================================================================
+//	GunLogBookID holder - The structure that keeps a record of all "LogBookID:S" for guns that have been created
+//==============================================================================================================================
+
+
+
+type GunLogBookID_holder struct {
+
+	V5Cs 	[]string `json:"GunLogBookID"`
 }
 
 
