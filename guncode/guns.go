@@ -96,6 +96,8 @@ type Guns struct{
 
 	OwnerContractID	string `json"ownerContractID"`
 
+	GunLogBookID    string `json:"gunLogBookID"`
+
 
 }
 
