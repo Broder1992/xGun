@@ -112,7 +112,7 @@ type GunLogBookID_holder struct {
 }
 
 //==============================================================================================================================
-//	User_and_eCert - Struct for storing the JSON of a user and their ecert - Generic
+//	User_and_eCert - Struct for storing the Json of a user and their e_cert
 //==============================================================================================================================
 
 
@@ -134,11 +134,11 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 
 	bytes, err := json.Marshal(gunLogBookIds)
 
-	if err !nil { return nil, errors.New("Error creating GunLogBookId_holder record")}
+	if err != nil { return nil, errors.New("Error creating GunLogBookId_holder record")}
 
 	err = stub.PutState("gunLogBookIds", bytes)
 
-	for i:=0 i < len(args); i=1+2{
+	for i:=0; i < len(args); i=1+2{
 		t.add_ecert(stub, args[i], args[i + 1])
 	}
 
