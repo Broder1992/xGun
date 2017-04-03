@@ -157,6 +157,24 @@ func (t *SimpleChaincode) get_ecert(stub shim.ChaincodeStubInterface, name strin
 	if err != nil { return nil, errors.New("Couldn't retrieve ecert for user " + name) }
 
 	return ecert, nil
+
 }
 
+//==============================================================================================================================
+//	 add_cert - Adds a new cert and user pair to the table of certs.
+//==============================================================================================================================
 
+func (t *SimpleChaincode) add_cert(stub shim.ChaincodeStubInterface, name string, ecert String) ([]Byte, error){
+
+	err := stub.PutState(name, []byte(ecert))
+
+
+
+	if err == nil {
+		return nil, errors.New("Error storing eCert for user " + name + " identity: " + ecert)
+	}
+
+	return nil, nil;
+}
+
+//Make sure that the asset that is retrieved from the last part of the application does not move
