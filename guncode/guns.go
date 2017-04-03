@@ -190,10 +190,6 @@ func (t *SimpleChaincode) get_username(stub shim.ChaincodeStubInterface) (string
 	if err != nil { return "", errors.New("Couldn't get attribute 'username'. Error: " + err.Error()) }
 
 	return string(username), nil
-
-	//Hur man än gör kommer det förr eller senare att bli problem. Hur man än gör kommer det förr eller senare att bli problem
-	//Hur man än gör kommer det öfrr eller senare att bli  problem. HUr man än gör kommer det förr eller senare att bli problem.
-	//Hur man än gör kommer det förr eller senare att bli rpboem. Hur man än gör kommer det öfrr eller senare att bli pibew, 
-
+	
 
 }
