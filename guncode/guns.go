@@ -125,7 +125,7 @@ type User_and_eCert struct {
 }
 
 //==============================================================================================================================
-//	The init function that is called on deplpoyment of the chain code.
+//	The init function is called when the chaoncode is deployed to the IBM platform.
 //==============================================================================================================================
 
 func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error) {
@@ -145,16 +145,9 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 	return nil, nil;
 }
 
-//==============================================================================================================================
-
-//	 General Functions
 
 //==============================================================================================================================
-
-//	 get_ecert - Takes the name passed and calls out to the REST API for HyperLedger to retrieve the ecert
-
-//				 for that user. Returns the ecert as retrived including html encoding.
-
+//	 get_ecert - Returns the e_cert beloning to the user whos name is passed in the function constructor.
 //==============================================================================================================================
 
 func (t *SimpleChaincode) get_ecert(stub shim.ChaincodeStubInterface, name string) ([]byte, error) {
@@ -164,7 +157,6 @@ func (t *SimpleChaincode) get_ecert(stub shim.ChaincodeStubInterface, name strin
 	if err != nil { return nil, errors.New("Couldn't retrieve ecert for user " + name) }
 
 	return ecert, nil
-
 }
 
 
