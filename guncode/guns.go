@@ -177,4 +177,20 @@ func (t *SimpleChaincode) add_cert(stub shim.ChaincodeStubInterface, name string
 	return nil, nil;
 }
 
-//Make sure that the asset that is retrieved from the last part of the application does not move
+//==============================================================================================================================
+//	Retreives the user name of the user who invoked the request.
+//==============================================================================================================================
+
+
+
+func (t *SimpleChaincode) get_username(stub shim.ChaincodeStubInterface) (string, error) {
+
+
+
+	username, err := stub.ReadCertAttribute("username");
+
+	if err != nil { return "", errors.New("Couldn't get attribute 'username'. Error: " + err.Error()) }
+
+	return string(username), nil
+
+}
