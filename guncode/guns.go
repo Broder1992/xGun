@@ -43,6 +43,9 @@ const GUNMERCHANT = "gunmerhcant"
 //The private gun owner purhcases the gun from the gun merchant
 const PRIVATEGUNOWNER = "privategunowner"
 
+//The provider fo the license from the gun owner himself.
+const GUNLAWPROVIDER = "gunlawProvider"
+
 //The gun destructor destroys the gun, thus ending the life cycle of the weapon.
 const GUNDESTRUCTOR = "gundestructor"
 
@@ -141,6 +144,49 @@ func (t *SimpleChaincode) Init(stub shim.ChaincodeStubInterface, function string
 	}
 
 	return nil, nil;
+}
+
+//==============================================================================================================================
+//	Query function for taking query related functions and execute them against the ledger.
+//==============================================================================================================================
+
+func(t * SimpleChaincode) Query (stub shim.ChaincodeStubInterface, function string, args []string) ([]byte, error){
+
+	fmt.Println("Query function is running function: " + function)
+
+	if function == "read"{
+		return t.read(stub, args)
+	}else if function == "update"{
+		return t.update
+	}else if function == "enlist"{
+		return t.enlis
+	}
+
+	return nil, errors.New("Reveived unknown function for query: " + function)
+}
+
+//==============================================================================================================================
+//	Function group: Query - Read the value of a block in the chain.
+//==============================================================================================================================
+
+func (t *SimpleChaincode) read (stub shim.ChaincodeStubInterface, args []String) ([]byte, errors){
+	var keyName, value string
+	var err error
+	fmt.Println("Running function write()")
+
+	if len(args) != 2{
+		return nil, errors.New("Incorrect number of arguments provided. ")
+	}
+
+	keyName = args[0]
+	value = args[1]
+	err = stub.PutState(keyname, []byte(value)) //Write the value of the the variable into the chaincode state.
+
+	if err != nil{
+		return nil, err
+	}
+
+	return nil, nil
 }
 
 
