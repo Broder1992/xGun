@@ -189,6 +189,4 @@ func (t *SimpleChaincode) get_username(stub shim.ChaincodeStubInterface) (string
 
 	return string(username), nil
 
-
-
 }
